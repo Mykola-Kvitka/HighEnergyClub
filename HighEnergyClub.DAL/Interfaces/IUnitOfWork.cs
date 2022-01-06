@@ -15,6 +15,7 @@ namespace HighEnergyClub.DAL.Interfaces
         IGenericRepository<TrainingProgramEntity> TrainingPrograms { get; }
         IGenericRepository<TrainingProgramExerciseEntity> TrainingProgramExercises { get; }
         IGenericRepository<UserEntity> Users { get; }
+        IGenericRepository<RoleEntity> Roles { get; }
         IGenericRepository<ArticleImageEntity> ArticleImages { get; }
         IGenericRepository<TrainerStudentEntity> TrainerStudents{ get; }
     }

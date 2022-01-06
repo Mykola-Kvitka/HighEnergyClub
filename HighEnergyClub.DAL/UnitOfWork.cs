@@ -21,6 +21,7 @@ namespace HighEnergyClub.DAL
         private GenericRepository<TrainerStudentEntity> _trainerStudents;
         private GenericRepository<ArticleImageEntity> _articleImages;
         private GenericRepository<UserEntity> _users;
+        private GenericRepository<RoleEntity> _roles;
 
         public UnitOfWork(DataAccsess appData)
         {
@@ -44,6 +45,7 @@ namespace HighEnergyClub.DAL
         public IGenericRepository<TrainingProgramExerciseEntity> TrainingProgramExercises => _trainingProgramExercises ??= new GenericRepository<TrainingProgramExerciseEntity>(_appData);
 
         public IGenericRepository<UserEntity> Users => _users ??= new GenericRepository<UserEntity>(_appData);
+        public IGenericRepository<RoleEntity> Roles => _roles ??= new GenericRepository<RoleEntity>(_appData);
 
         public IGenericRepository<ArticleImageEntity> ArticleImages => _articleImages ??= new GenericRepository<ArticleImageEntity>(_appData);
 

@@ -5,16 +5,18 @@ using System;
 
 namespace HighEnergyClub.DAL.DataAccses
 {
-    public class DataAccsess : IdentityDbContext<UserEntity<Guid>>
+    public class DataAccsess : IdentityDbContext<UserEntity,RoleEntity,Guid>
     {
         public DataAccsess(DbContextOptions<DataAccsess> options) : base(options) { Database.EnsureCreated(); }
 
         public DbSet<ArticleEntity> Articles { get; set; }
+        public DbSet<ArticleImageEntity> ArticleImages { get; set; }
         public DbSet<ExerciseEntity> Exercises { get; set; }
         public DbSet<ImageEntity> Images { get; set; }
         public DbSet<LinkEntity> Links { get; set; }
         public DbSet<SeasonTicketEntity> SeasonTickets { get; set; }
         public DbSet<SeasonTicketTypeEntity> SeasonTicketTypes { get; set; }
+        public DbSet<TrainerStudentEntity> TrainerStudents { get; set; }
         public DbSet<TrainingProgramEntity> TrainingPrograms { get; set; }
         public DbSet<TrainingProgramExerciseEntity> TrainingProgramExercises { get; set; }
     }

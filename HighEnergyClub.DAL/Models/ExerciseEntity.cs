@@ -10,6 +10,6 @@ namespace HighEnergyClub.DAL.Models
         [MaxLength(64)]
         public string ExerciseName { get; set; }
         public string ExerciseDescription { get; set; }
-        public Guid VideoLinkHowToDo { get; set; }
+        public string URL { get; set; }
     }
 }

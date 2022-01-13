@@ -7,6 +7,7 @@ namespace HighEnergyClub.BL.Models
     {
         public Guid Id { get; set; }
         public string ExerciseName { get; set; }
-        public Guid VideoLinkHowToDo { get; set; }
+        public string ExerciseDescription { get; set; }
+        public string URL { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System;
 
 namespace HighEnergyClub.DAL.DataAccses
 {
-    public class DataAccsess : IdentityDbContext<UserEntity,RoleEntity,Guid>
+    public class DataAccsess : IdentityDbContext<UserEntity, RoleEntity, Guid>
     {
         public DataAccsess(DbContextOptions<DataAccsess> options) : base(options) { Database.EnsureCreated(); }
 
@@ -19,5 +19,16 @@ namespace HighEnergyClub.DAL.DataAccses
         public DbSet<TrainerStudentEntity> TrainerStudents { get; set; }
         public DbSet<TrainingProgramEntity> TrainingPrograms { get; set; }
         public DbSet<TrainingProgramExerciseEntity> TrainingProgramExercises { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<ArticleImageEntity>()
+                    .HasKey(x => new { x.ArticleId, x.ImageId });
+
+            builder.Entity<TrainerStudentEntity>()
+                    .HasKey(x => new { x.StudentId, x.TrainerId });
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace HighEnergyClub.PL
         {
             services.AddRazorPages();
 
-            services.AddIdentity<UserViewModel, IdentityRole>()
+            services.AddIdentity<UserViewModel, RoleViewModel>()
                  .AddEntityFrameworkStores<DataAccsess>();
 
             services.AddControllersWithViews();

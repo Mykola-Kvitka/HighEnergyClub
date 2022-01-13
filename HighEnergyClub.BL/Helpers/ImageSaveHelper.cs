@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace HighEnergyClub.BL.Helpers
 {
@@ -16,7 +17,7 @@ namespace HighEnergyClub.BL.Helpers
             }
         }
 
-        public static string SaveImageAndGeneratePath(IFormFile image, string directory)
+        public static async Task<string> SaveImageAndGeneratePath(IFormFile image, string directory)
         {
             string[] imageName = image.FileName.Split(".");
             var format = imageName[1];
@@ -41,7 +42,7 @@ namespace HighEnergyClub.BL.Helpers
 
             using (var fileStream = new FileStream(directory + slash + template + dot + format, FileMode.Create))
             {
-                image.CopyTo(fileStream);
+               await image.CopyToAsync(fileStream);
             }
 
             return template;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HighEnergyClub.BL.ViewModels
+namespace HighEnergyClub.PL.ViewModels
 {
     public class TrainingProgramViewModel
     { 

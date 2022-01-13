@@ -9,6 +9,7 @@ namespace HighEnergyClub.PL.ViewModels
         public Guid Id { get; set; } = Guid.NewGuid();
         [MaxLength(64)]
         public string ExerciseName { get; set; }
-        public LinkViewModel VideoLinkHowToDo { get; set; }
+        public string ExerciseDescription { get; set; }
+        public string URL { get; set; }
     }
 }

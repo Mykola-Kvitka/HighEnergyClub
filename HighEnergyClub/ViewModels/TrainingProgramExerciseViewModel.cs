@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HighEnergyClub.PL.ViewModels
 {
-    public class TrainingProgramExercise
+    public class TrainingProgramExerciseViewModel
     {
         public Guid Id { get; set; }
         public Guid TrainingProgramID { get; set; }

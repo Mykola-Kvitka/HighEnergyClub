@@ -57,9 +57,9 @@ namespace HighEnergyClub.BL.Services
 
         public async Task<IEnumerable<Exercise>> GetPagedAsync(int page = 1, int pageSize = 15)
         {
-            var orgonizers = await _unitOfWork.Exercises.GetPagedAsync(page, pageSize);
+            var exercises = await _unitOfWork.Exercises.GetPagedAsync(page, pageSize);
 
-            return _mapper.Map<IEnumerable<ExerciseEntity>, IEnumerable<Exercise>>(orgonizers);
+            return _mapper.Map<IEnumerable<ExerciseEntity>, IEnumerable<Exercise>>(exercises);
         }
 
         public async Task UpdateAsync(Exercise request)

@@ -7,6 +7,7 @@ namespace HighEnergyClub.DAL.Models
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid SeasonTicketTypeId { get; set; }
         [MaxLength(128)]
         public string FIO { get; set; }
         public DateTime Start_Date { get; set; }

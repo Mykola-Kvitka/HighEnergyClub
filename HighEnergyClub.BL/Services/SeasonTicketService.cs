@@ -2,6 +2,7 @@
 using HighEnergyClub.BL.Interfaces;
 using HighEnergyClub.BL.Models;
 using HighEnergyClub.DAL.Interfaces;
+using HighEnergyClub.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,39 +22,51 @@ namespace HighEnergyClub.BL.Services
             _mapper = mapper;
         }
 
-        public Task CreateAsync(SeasonTicket request)
+        public async Task CreateAsync(SeasonTicket request)
         {
-            throw new NotImplementedException();
+            var requestEntity = _mapper.Map<SeasonTicket, SeasonTicketEntity>(request);
+
+            await _unitOfWork.SeasonTickets.CreateAsync(requestEntity);
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var request = await GetAsync(id);
+
+            await _unitOfWork.Exercises.DeleteAsync(id);
         }
 
-        public Task<IEnumerable<SeasonTicket>> GetAllAsync()
+        public async Task<IEnumerable<SeasonTicket>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var seasonTicketEntities = await _unitOfWork.SeasonTickets.GetAllAsync();
+
+            return _mapper.Map<IEnumerable<SeasonTicketEntity>, IEnumerable<SeasonTicket>>(seasonTicketEntities);
         }
 
-        public Task<SeasonTicket> GetAsync(Guid id)
+        public async Task<SeasonTicket> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var seasonTicketEntities = await _unitOfWork.SeasonTickets.GetAsync(id);
+
+            return _mapper.Map<SeasonTicketEntity, SeasonTicket>(seasonTicketEntities);
         }
 
-        public Task<int> GetCountAsync()
+        public async Task<int> GetCountAsync()
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.SeasonTickets.GetCountAsync();
         }
 
-        public Task<IEnumerable<SeasonTicket>> GetPagedAsync(int page = 1, int pageSize = 15)
+        public async Task<IEnumerable<SeasonTicket>> GetPagedAsync(int page = 1, int pageSize = 15)
         {
-            throw new NotImplementedException();
+            var seasonTicketEntities = await _unitOfWork.SeasonTickets.GetPagedAsync(page, pageSize);
+
+            return _mapper.Map<IEnumerable<SeasonTicketEntity>, IEnumerable<SeasonTicket>>(seasonTicketEntities);
         }
 
-        public Task UpdateAsync(SeasonTicket request)
+        public async Task UpdateAsync(SeasonTicket request)
         {
-            throw new NotImplementedException();
+            var requestEntity = _mapper.Map<SeasonTicket, SeasonTicketEntity>(request);
+
+            await _unitOfWork.SeasonTickets.UpdateAsync(requestEntity);
         }
     }
 }

@@ -7,6 +7,7 @@ namespace HighEnergyClub.PL.ViewModels
     { 
         public Guid Id { get; set; }
         public Guid TrainerId { get; set; }
+        public Guid UserId { get; set; }
         public string ProgramName { get; set; }
     }
 }

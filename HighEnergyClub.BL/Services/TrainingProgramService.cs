@@ -2,6 +2,7 @@
 using HighEnergyClub.BL.Interfaces;
 using HighEnergyClub.BL.Models;
 using HighEnergyClub.DAL.Interfaces;
+using HighEnergyClub.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,39 +22,96 @@ namespace HighEnergyClub.BL.Services
             _mapper = mapper;
         }
 
-        public Task CreateAsync(TrainingProgram request)
+        public async Task CreateAsync(SaveTrainingProgram request)
+        {
+            var requestEntity = _mapper.Map<SaveTrainingProgram, TrainingProgramEntity>(request);
+
+            var result = (await _unitOfWork.TrainingPrograms.CreateAsync(requestEntity)).Id;
+
+            await ProcessDependencyAdding(request, result);
+        }   
+
+        public async Task DeleteAsync(Guid id)
+        {
+            await _unitOfWork.Articles.DeleteAsync(id);
+
+            await ProcessDependencyRemove(id);
+        }
+
+        public async Task<IEnumerable<TrainingProgramDisplay>> GetAllAsync()
+        {
+            var result = await _unitOfWork.TrainingPrograms.GetAllAsync();
+
+            var trainingProgram = _mapper.Map<List<TrainingProgramEntity>, List<TrainingProgramDisplay>>(result);
+
+            await ProcessTrainingProgramExerciseGetting(trainingProgram);
+
+            return trainingProgram;
+        }
+
+
+        public async Task<TrainingProgramDisplay> GetAsync(Guid id)
+        {
+            var result = await _unitOfWork.TrainingPrograms.GetAsync(id);
+
+            var trainingProgram = _mapper.Map<TrainingProgramEntity, TrainingProgramDisplay>(result);
+
+            //await ProcessTrainingProgramGetting(trainingProgram);
+
+            return trainingProgram;
+        }
+
+        public async Task<int> GetCountAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task<IEnumerable<TrainingProgram>> GetPagedAsync(int page = 1, int pageSize = 15)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<TrainingProgram>> GetAllAsync()
+        public async Task UpdateAsync(TrainingProgram request)
         {
             throw new NotImplementedException();
+        }
+        private async Task ProcessDependencyAdding(SaveTrainingProgram request, Guid result)
+        {
+            foreach (var item in request.ExerciseEntityID)
+            {
+                var entity = new TrainingProgramExerciseEntity()
+                {
+                    ExerciseEntityID = item,
+                    TrainingProgramID = result,
+                    Approaches = request.Approaches,
+                    NumberRepitions = request.NumberRepitions,
+                    Weight = request.Weight
+                };
+
+                await _unitOfWork.TrainingProgramExercises.CreateAsync(entity);
+            }
+        }
+        private async Task ProcessDependencyRemove(Guid id)
+        {
+            var result = await _unitOfWork.TrainingProgramExercises.FindAsync(program => program.TrainingProgramID == id);
+
+            foreach (var item in result)
+            {
+                await _unitOfWork.TrainingProgramExercises.DeleteAsync(item.Id);
+            }
+        }
+        private async Task ProcessTrainingProgramExerciseGetting(IEnumerable<TrainingProgramDisplay> trainingProgram)
+        {
+            foreach (var item in trainingProgram)
+            {
+                 item.trainingProgramExercises.AddRange(
+                     (IEnumerable<TrainingProgramExercise>)
+                     (await _unitOfWork.TrainingProgramExercises
+                     .FindAsync(a => a.TrainingProgramID == item.Id))
+                     );
+            }       
         }
 
-        public Task<TrainingProgram> GetAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<int> GetCountAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<TrainingProgram>> GetPagedAsync(int page = 1, int pageSize = 15)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(TrainingProgram request)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

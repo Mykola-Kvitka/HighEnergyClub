@@ -8,6 +8,7 @@ namespace HighEnergyClub.DAL.Models
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
         public Guid TrainerId { get; set; }
+        public Guid UserId { get; set; }
         [MaxLength(64)]
         public string ProgramName { get; set; }
     }

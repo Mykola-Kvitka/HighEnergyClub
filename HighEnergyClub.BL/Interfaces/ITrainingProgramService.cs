@@ -7,12 +7,12 @@ namespace HighEnergyClub.BL.Interfaces
 {
     public interface ITrainingProgramService
     {
-        Task CreateAsync(TrainingProgram request);
+        Task CreateAsync(SaveTrainingProgram request);
         Task<int> GetCountAsync();
         Task<IEnumerable<TrainingProgram>> GetPagedAsync(int page = 1, int pageSize = 15);
-        Task<IEnumerable<TrainingProgram>> GetAllAsync();
+        Task<IEnumerable<TrainingProgramDisplay>> GetAllAsync();
         Task DeleteAsync(Guid id);
-        Task<TrainingProgram> GetAsync(Guid id);
+        Task<TrainingProgramDisplay> GetAsync(Guid id);
         Task UpdateAsync(TrainingProgram request);
 
     }

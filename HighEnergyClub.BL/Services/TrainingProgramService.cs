@@ -22,20 +22,25 @@ namespace HighEnergyClub.BL.Services
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// need add student trainer dependency
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task CreateAsync(SaveTrainingProgram request)
         {
             var requestEntity = _mapper.Map<SaveTrainingProgram, TrainingProgramEntity>(request);
 
             var result = (await _unitOfWork.TrainingPrograms.CreateAsync(requestEntity)).Id;
 
-            await ProcessDependencyAdding(request, result);
+            await ProcessProgramExercisesDependencyAdding(request, result);
         }   
 
         public async Task DeleteAsync(Guid id)
         {
-            await _unitOfWork.Articles.DeleteAsync(id);
+            await _unitOfWork.TrainingPrograms.DeleteAsync(id);
 
-            await ProcessDependencyRemove(id);
+            await ProcessProgramExercisesDependencyRemove(id);
         }
 
         public async Task<IEnumerable<TrainingProgramDisplay>> GetAllAsync()
@@ -56,26 +61,29 @@ namespace HighEnergyClub.BL.Services
 
             var trainingProgram = _mapper.Map<TrainingProgramEntity, TrainingProgramDisplay>(result);
 
-            //await ProcessTrainingProgramGetting(trainingProgram);
+            //TODO:
+           // await ProcessTrainingProgramExerciseGetting(trainingProgram);
 
             return trainingProgram;
         }
 
         public async Task<int> GetCountAsync()
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.TrainingPrograms.GetCountAsync();
         }
 
         public async Task<IEnumerable<TrainingProgram>> GetPagedAsync(int page = 1, int pageSize = 15)
         {
-            throw new NotImplementedException();
+            var TrainingPrograms = await _unitOfWork.TrainingPrograms.GetPagedAsync(page, pageSize);
+
+            return _mapper.Map<IEnumerable<TrainingProgramEntity>, IEnumerable<TrainingProgram>>(TrainingPrograms);
         }
 
         public async Task UpdateAsync(TrainingProgram request)
         {
             throw new NotImplementedException();
         }
-        private async Task ProcessDependencyAdding(SaveTrainingProgram request, Guid result)
+        private async Task ProcessProgramExercisesDependencyAdding(SaveTrainingProgram request, Guid result)
         {
             foreach (var item in request.ExerciseEntityID)
             {
@@ -91,7 +99,7 @@ namespace HighEnergyClub.BL.Services
                 await _unitOfWork.TrainingProgramExercises.CreateAsync(entity);
             }
         }
-        private async Task ProcessDependencyRemove(Guid id)
+        private async Task ProcessProgramExercisesDependencyRemove(Guid id)
         {
             var result = await _unitOfWork.TrainingProgramExercises.FindAsync(program => program.TrainingProgramID == id);
 

@@ -1,5 +1,6 @@
-﻿using HighEnergyClub.BL.Models;
-using HighEnergyClub.BL.Services;
+﻿using AutoMapper;
+using HighEnergyClub.BL.Interfaces;
+using HighEnergyClub.BL.Models;
 using HighEnergyClub.PL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,27 +12,21 @@ namespace HighEnergyClub.PL.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ArticleService _articleService;
+        private readonly IArticleService _articleService;
+        private readonly IMapper _mapper;
 
-        public HomeController(ArticleService articleService)
+        public HomeController(IArticleService articleService, IMapper mapper)
         {
             _articleService = articleService;
+            _mapper = mapper;
         }
 
-        public async Task<ActionResult> CreateAsync()
+        public async Task<ActionResult> Index()
         {
-            var viewModel = new SaveArticleViewModel();
+            //var article = await _articleService.GetAllAsync();
 
-            return View(viewModel);
-        }
-
-        [HttpPost("home/create")]
-        public async Task<ActionResult> CreateActivityAsync(SaveArticleViewModel requestVm)
-        {
-
-            await _articleService.CreateAsync(new SaveArticle() { Images = requestVm.Images, Text = requestVm.Text, Title = requestVm.Title });
-            return Redirect("~/home");
-
+            //return View(_mapper.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(article));
+            return View();
         }
     }
 }

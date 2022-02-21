@@ -1,17 +1,19 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HighEnergyClub</title>
+    <title>@ViewData["Title"] - High Energy Club</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/main.a69e6859d715a895eaa9.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">HighEnergyClub</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">High Energy Club</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,10 +21,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="Index">Контакты</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Activities" asp-action="Index">Расписание</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Statute">Клубная карта</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Organizers" asp-action="Index"> О нас</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Sponsors" asp-action="Index">Вход</a>
                         </li>
                     </ul>
                 </div>
@@ -35,16 +46,79 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+
+    <footer class="main-footer">
         <div class="container">
-            &copy; 2021 - HighEnergyClub - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <div class="row justify-content-center" id="contacts">
+                <div class="col-lg-3 col-md-3 d-none d-sm-block footer-logo">
+                    <img src="/images/footer-logo.png">
+                    Место, где рождается энергия.
+                </div>
+                <div class="col-lg-3 col-md-2 col-sm-4 col-6">
+                    <nav class="footer__nav site-nav">
+                        <h5 class="footer__block-title">Навигация</h5>
+                        <ul>
+                            <li>
+                                <a href="#about-us">О нас</a>
+                            </li>
+                            <li>
+                                <a href="timetable.html">Расписание</a>
+                            </li>
+                            <li>
+                                <a href="club-card.html">Клубная карта</a>
+                            </li>
+                            <li>
+                                <a href="#contacts">Контакты</a>
+                            </li>
+                            <li>
+                                <a href="/">Главная</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
+                    <nav class="footer__nav">
+                        <h5 class="footer__block-title">Контактная инфорация</h5>
+                        <ul>
+                            <li>г.Харьков, ул. Валентиновская 23Е</li>
+                            <li>
+                                <a href="mailTo:Highen@ukr.net" class="footer__contacts_mail">Highen@ukr.net</a>
+                            </li>
+                            <li>
+                                <a href="tel:+380994177731">+380 99 417 77 31</a>
+                            </li>
+                            <li>
+                                <a href="tel:+380639177731">+380 63 917 77 31</a>
+                            </li>
+                            <li class="social-links">
+                                <a href="https://www.instagram.com/highenergyclub/" target="_blank" rel="noreferrer">
+                                    <img src="/images/insta-icon.svg">
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    <nav class="footer__nav">
+                        <h5 class="footer__block-title">Мы работаем</h5>
+                        <ul>
+                            <li>Пн-Сб&nbsp;<span>8:00-22:00</span></li>
+                            <li>Вс&nbsp;<span>10:00-17:00</span></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            2016 - <span id="current-year">2022</span> Все права защищены High ENERGY Club
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="js/main.a69e6859d715a895eaa9.js"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

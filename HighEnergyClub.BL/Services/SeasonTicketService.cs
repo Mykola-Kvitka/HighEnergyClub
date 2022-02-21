@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HighEnergyClub.BL.Services
 {
-    class SeasonTicketService : ISeasonTicketService
+    public class SeasonTicketService : ISeasonTicketService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

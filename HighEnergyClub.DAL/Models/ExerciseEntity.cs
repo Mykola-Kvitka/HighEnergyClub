@@ -9,6 +9,7 @@ namespace HighEnergyClub.DAL.Models
         public Guid Id { get; set; } = Guid.NewGuid();
         [MaxLength(64)]
         public string ExerciseName { get; set; }
-        public Guid VideoLinkHowToDo { get; set; }
+        public string ExerciseDescription { get; set; }
+        public string URL { get; set; }
     }
 }

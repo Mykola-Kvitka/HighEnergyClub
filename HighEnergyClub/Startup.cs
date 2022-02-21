@@ -1,16 +1,14 @@
 using HighEnergyClub.DAL.DataAccses;
-using HighEnergyClub.PL.Models;
+using HighEnergyClub.PL.Infastructure;
+using HighEnergyClub.PL.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HighEnergyClub.PL
@@ -29,8 +27,12 @@ namespace HighEnergyClub.PL
         {
             services.AddRazorPages();
 
-            services.AddIdentity<UserViewModel, IdentityRole>()
+            services.AddIdentity<UserViewModel, RoleViewModel>()
                  .AddEntityFrameworkStores<DataAccsess>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddDependencies();
 
             services.AddControllersWithViews();
 
@@ -63,7 +65,10 @@ namespace HighEnergyClub.PL
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}"
+                );
             });
         }
     }

@@ -6,7 +6,8 @@ namespace HighEnergyClub.DAL.Models
     public class ImageEntity
     {
         [Key]
+        public Guid ImageId { get; set; } = Guid.NewGuid();
         [MaxLength(2000)]
-        public string ImagePathId { get; set; }
+        public string ImagePath{ get; set; }
     }
 }

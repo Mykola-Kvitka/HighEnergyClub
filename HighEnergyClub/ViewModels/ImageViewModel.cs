@@ -5,6 +5,7 @@ namespace HighEnergyClub.PL.ViewModels
 {
     public class ImageViewModel
     {
-        public string ImagePathId { get; set; }
+        public Guid ImageId { get; set; }
+        public string ImagePath { get; set; }
     }
 }

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using HighEnergyClub.PL.ViewModels;
+using System;
 
-namespace HighEnergyClub.PL.Models
+namespace HighEnergyClub.PL.ViewModels
 {
     public class ArticleImageViewModel
     {

@@ -5,6 +5,7 @@ namespace HighEnergyClub.BL.Models
 {
     public class Image
     {
-        public string ImagePathId { get; set; }
+        public Guid ImageId { get; set; }
+        public string ImagePath { get; set; }
     }
 }

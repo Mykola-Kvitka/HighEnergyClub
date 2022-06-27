@@ -14,10 +14,17 @@ namespace HighEnergyClub.DAL.DataAccses
         {
             string adminEmail = "admin@gmail.com";
             string password = "_Aa123456";
+
             if (await roleManager.FindByNameAsync("admin") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole<Guid>("admin"));
             }
+
+            if (await roleManager.FindByNameAsync("coach") == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole<Guid>("coach"));
+            }
+
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
                 UserEntity admin = new UserEntity { Email = adminEmail, UserName = adminEmail };

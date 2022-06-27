@@ -1,4 +1,5 @@
 using HighEnergyClub.DAL.DataAccses;
+using HighEnergyClub.DAL.Models;
 using HighEnergyClub.PL.Infastructure;
 using HighEnergyClub.PL.ViewModels;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +28,7 @@ namespace HighEnergyClub.PL
         {
             services.AddRazorPages();
 
-            services.AddIdentity<UserViewModel, RoleViewModel>()
+            services.AddIdentity<UserEntity, RoleEntity>()
                  .AddEntityFrameworkStores<DataAccsess>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

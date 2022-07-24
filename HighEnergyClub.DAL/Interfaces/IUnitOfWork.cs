@@ -4,7 +4,7 @@ using System;
 
 namespace HighEnergyClub.DAL.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         IGenericRepository<ArticleEntity> Articles { get; }
         IGenericRepository<ExerciseEntity> Exercises { get; }
@@ -14,8 +14,6 @@ namespace HighEnergyClub.DAL.Interfaces
         IGenericRepository<SeasonTicketTypeEntity> SeasonTicketTypes { get; }
         IGenericRepository<TrainingProgramEntity> TrainingPrograms { get; }
         IGenericRepository<TrainingProgramExerciseEntity> TrainingProgramExercises { get; }
-        IGenericRepository<UserEntity> Users { get; }
-        IGenericRepository<RoleEntity> Roles { get; }
         IGenericRepository<ArticleImageEntity> ArticleImages { get; }
         IGenericRepository<TrainerStudentEntity> TrainerStudents{ get; }
     }

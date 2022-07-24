@@ -6,7 +6,7 @@ namespace HighEnergyClub.PL.ViewModels
 {
     public class ArticleViewModel
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
         [MaxLength(200)]
         public string Title { get; set; }
         [MaxLength(2000)]

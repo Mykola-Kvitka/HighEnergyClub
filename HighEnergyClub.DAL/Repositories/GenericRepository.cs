@@ -17,6 +17,8 @@ namespace HighEnergyClub.DAL.Repositories
         public GenericRepository(DataAccsess appData)
         {
             _appData = appData;
+            _dbSet = appData.Set<T>();
+
         }
 
         public async Task<T> CreateAsync(T item)

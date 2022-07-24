@@ -10,19 +10,19 @@ namespace HighEnergyClub.DAL.DataAccses
 {
     public static class RoleInitializer
     {
-        public static async Task InitializeAsync(UserManager<UserEntity> userManager, RoleManager<IdentityRole<Guid>> roleManager)
+        public static async Task InitializeAsync(UserManager<UserEntity> userManager, RoleManager<RoleEntity> roleManager)
         {
             string adminEmail = "admin@gmail.com";
             string password = "_Aa123456";
 
             if (await roleManager.FindByNameAsync("admin") == null)
             {
-                await roleManager.CreateAsync(new IdentityRole<Guid>("admin"));
+                await roleManager.CreateAsync(new RoleEntity { Name = "admin" });
             }
 
             if (await roleManager.FindByNameAsync("coach") == null)
             {
-                await roleManager.CreateAsync(new IdentityRole<Guid>("coach"));
+                await roleManager.CreateAsync(new RoleEntity { Name = "coach" });
             }
 
             if (await userManager.FindByNameAsync(adminEmail) == null)

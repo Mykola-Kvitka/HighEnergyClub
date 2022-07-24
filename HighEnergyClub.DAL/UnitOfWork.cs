@@ -20,8 +20,6 @@ namespace HighEnergyClub.DAL
         private GenericRepository<TrainingProgramExerciseEntity> _trainingProgramExercises;
         private GenericRepository<TrainerStudentEntity> _trainerStudents;
         private GenericRepository<ArticleImageEntity> _articleImages;
-        private GenericRepository<UserEntity> _users;
-        private GenericRepository<RoleEntity> _roles;
 
         public UnitOfWork(DataAccsess appData)
         {
@@ -44,31 +42,10 @@ namespace HighEnergyClub.DAL
 
         public IGenericRepository<TrainingProgramExerciseEntity> TrainingProgramExercises => _trainingProgramExercises ??= new GenericRepository<TrainingProgramExerciseEntity>(_appData);
 
-        public IGenericRepository<UserEntity> Users => _users ??= new GenericRepository<UserEntity>(_appData);
-        public IGenericRepository<RoleEntity> Roles => _roles ??= new GenericRepository<RoleEntity>(_appData);
-
         public IGenericRepository<ArticleImageEntity> ArticleImages => _articleImages ??= new GenericRepository<ArticleImageEntity>(_appData);
 
         public IGenericRepository<TrainerStudentEntity> TrainerStudents => _trainerStudents ??= new GenericRepository<TrainerStudentEntity>(_appData);
 
-        private bool disposed = false;
 
-        public virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _appData.Dispose();
-                }
-                this.disposed = true;
-            }
-        }
-
-        void IDisposable.Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
     }
 }

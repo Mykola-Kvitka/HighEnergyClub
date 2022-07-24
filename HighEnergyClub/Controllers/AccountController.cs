@@ -1,4 +1,5 @@
-﻿using HighEnergyClub.PL.ViewModels;
+﻿using HighEnergyClub.DAL.Models;
+using HighEnergyClub.PL.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -7,10 +8,10 @@ namespace HighEnergyClub.PL.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<UserViewModel> _userManager;
-        private readonly SignInManager<UserViewModel> _signInManager;
+        private readonly UserManager<UserEntity> _userManager;
+        private readonly SignInManager<UserEntity> _signInManager;
 
-        public AccountController(UserManager<UserViewModel> userManager, SignInManager<UserViewModel> signInManager)
+        public AccountController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -27,7 +28,7 @@ namespace HighEnergyClub.PL.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserViewModel user = new UserViewModel { Email = model.Email, UserName = model.Email };
+                UserEntity user = new UserEntity { Email = model.Email, UserName = model.Email };
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -51,6 +52,12 @@ namespace HighEnergyClub.PL.Controllers
         public IActionResult Login(string returnUrl = null)
         {
             return View(new LoginViewModel { ReturnUrl = returnUrl });
+        }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            return View();
         }
 
         [HttpPost]

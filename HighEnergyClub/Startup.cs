@@ -1,4 +1,5 @@
 using HighEnergyClub.DAL.DataAccses;
+using HighEnergyClub.DAL.Models;
 using HighEnergyClub.PL.Infastructure;
 using HighEnergyClub.PL.ViewModels;
 using Microsoft.AspNetCore.Builder;
@@ -25,9 +26,8 @@ namespace HighEnergyClub.PL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
 
-            services.AddIdentity<UserViewModel, RoleViewModel>()
+            services.AddIdentity<UserEntity, RoleEntity>()
                  .AddEntityFrameworkStores<DataAccsess>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -1,5 +1,22 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
 
 a.navbar-brand {
   white-space: normal;
@@ -60,7 +77,7 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 0px;
 }
 .footer {
   position: absolute;
@@ -68,4 +85,99 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+.footer-logo {
+    text-align: center
+}
+
+.main-footer .footer-logo img {
+    display: block;
+    margin: 0 auto 10px
+}
+.social-links a {
+    text-decoration: none;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    opacity: .9
+}
+.main-footer .footer__nav h5 {
+    font: 400 18px/18px Lato Regular;
+    margin: 5px 0 25px;
+    color: #fff
+}
+
+.main-footer .footer__nav ul {
+    list-style-type: none;
+    padding: 0
+}
+
+.main-footer .footer__nav li:not(:last-child) {
+    margin-bottom: 15px
+}
+
+.main-footer .footer__nav li.social-links a {
+    text-decoration: none;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    opacity: .9
+}
+
+.main-footer .footer__nav a {
+    color: #fff;
+    font: 300 14px/14px Lato Light Italic;
+    letter-spacing: .6px;
+    -webkit-transition: opacity .35s ease-out;
+    -o-transition: opacity .35s ease-out;
+    transition: opacity .35s ease-out
+}
+
+    .main-footer .footer__nav a:hover {
+        text-decoration: none;
+        opacity: 1
+    }
+
+.mr-auto, .mx-auto {
+    margin-right: auto !important
+}
+
+.mb-auto, .my-auto {
+    margin-bottom: auto !important
+}
+
+.ml-auto, .mx-auto {
+    margin-left: auto !important
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+@media (min-width:576px) {
+    .container {
+        max-width: 540px
+    }
+}
+
+@media (min-width:768px) {
+    .container {
+        max-width: 720px
+    }
+}
+
+@media (min-width:992px) {
+    .container {
+        max-width: 960px
+    }
+}
+
+@media (min-width:1200px) {
+    .container {
+        max-width: 1140px
+    }
 }

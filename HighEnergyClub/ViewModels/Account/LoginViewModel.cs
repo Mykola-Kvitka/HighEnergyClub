@@ -5,7 +5,7 @@ namespace HighEnergyClub.PL.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Електронна пошта")]
         public string Email { get; set; }
 
         [Required]
@@ -13,7 +13,7 @@ namespace HighEnergyClub.PL.ViewModels
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        [Display(Name = "Запомнить?")]
+        [Display(Name = "Запам'ятати вхід?")]
         public bool RememberMe { get; set; }
 
         public string ReturnUrl { get; set; }

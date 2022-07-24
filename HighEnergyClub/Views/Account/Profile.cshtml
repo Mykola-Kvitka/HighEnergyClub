@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouMusLib</title>
+    <style>
+        .one a {
+            background-color: black;
+            color: #FFA500;
+            border: solid;
+            border-width: medium;
+            text-decoration: none;
+            border-radius: 12px;
+            border-color: #FFA500;
+        }
+
+            .one a:hover,
+            .one a:focus {
+                background-color: #D2691E;
+                border-width: medium;
+                border-color: black;
+                color: black;
+            }
+
+        .spanValid {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h3>Личный кабинет </h3>
+    <form method="post">
+        <div class="container" asp-validation-summary="All">
+
+            <div class="col">
+                <div class="form-group">
+                    @*       <label asp-for="Picture">  Изменить:</label>
+                        <input type="file" asp-for="Picture"  class="form-control" style="width:50%"/><br>*@
+                </div>
+            </div>
+
+            <div class="col">
+
+
+                <div>
+                    <p class="one">
+                        <a asp-controller="Account" asp-action="EditProfile" asp-route-name="@User.Identity.Name">Редактировать профиль</a>
+                    </p>
+                </div>
+
+
+            </div>
+
+        </div>
+        @ViewData["MsgSaveEditUser"]
+    </form>
+
+</body>
+</html>

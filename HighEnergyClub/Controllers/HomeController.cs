@@ -28,5 +28,24 @@ namespace HighEnergyClub.PL.Controllers
             //return View(_mapper.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(article));
             return View();
         }
+        public IActionResult AboutUS()
+        {
+            return View();
+        }
+
+        public IActionResult Schedule()
+        {
+            return View();
+        }
+
+        public IActionResult ClubCard()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }

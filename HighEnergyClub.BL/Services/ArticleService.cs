@@ -76,7 +76,7 @@ namespace HighEnergyClub.BL.Services
 
             var articles = _mapper.Map<ArticleEntity, Article>(result);
 
-            await ProcessImagesGetting(articles);
+            articles.Images =  await ProcessImagesGetting(articles.Id);
 
             return articles;
         }
@@ -100,7 +100,7 @@ namespace HighEnergyClub.BL.Services
             {
                 idList.Add((await _unitOfWork.Images.CreateAsync(new ImageEntity
                 {
-                    ImagePath = await ImageSaveHelper.SaveImageAndGeneratePath(item, "wwwroot/Images")
+                    ImagePath = await ImageSaveHelper.SaveImageAndGeneratePath(item, "Images/")
                 })).ImageId);
             }
 
@@ -133,21 +133,23 @@ namespace HighEnergyClub.BL.Services
             }
         }
 
-        private async Task ProcessImagesGetting(Article articles)
+        private async Task<IEnumerable<Image>> ProcessImagesGetting(Guid articles)
         {
-            var imagesId = await _unitOfWork.ArticleImages.FindAsync(item => item.ArticleId == articles.Id);
+            var imagesId = await _unitOfWork.ArticleImages.FindAsync(item => item.ArticleId == articles);
 
+            List<ImageEntity> images = new List<ImageEntity>();
 
             if (imagesId.Any())
             {
-                List<ImageEntity> images = new List<ImageEntity>();
 
                 foreach (var id in imagesId)
                 {
                     images.AddRange(await _unitOfWork.Images.FindAsync(item => id.ImageId == item.ImageId));
                 }
-                articles.Images = _mapper.Map<List<ImageEntity>, List<Image>>(images);
             }
+
+            return _mapper.Map<List<ImageEntity>, List<Image>>(images);
+
         }
         private async Task ProcessImagesGetting(List<Article> articles)
         {

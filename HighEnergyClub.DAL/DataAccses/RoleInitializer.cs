@@ -30,9 +30,14 @@ namespace HighEnergyClub.DAL.DataAccses
                 UserEntity admin = new UserEntity { Email = adminEmail, UserName = adminEmail };
                 IdentityResult adminResult = await userManager.CreateAsync(admin, password);
 
-                if (adminResult.Succeeded)
+                UserEntity coa = new UserEntity { Email = "coach@gmail.com", UserName = adminEmail };
+                IdentityResult coaResult = await userManager.CreateAsync(admin, password);
+
+                if (coaResult.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, "admin");
+                    await userManager.AddToRoleAsync(coa, "coach");
+
                 }
             }
         }

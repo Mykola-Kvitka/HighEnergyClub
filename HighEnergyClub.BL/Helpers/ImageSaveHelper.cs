@@ -17,17 +17,19 @@ namespace HighEnergyClub.BL.Helpers
             }
         }
 
+        private static readonly string baseFolder = "wwwroot/";
+
         public static async Task<string> SaveImageAndGeneratePath(IFormFile image, string directory)
         {
             string[] imageName = image.FileName.Split(".");
+
             var format = imageName[1];
             string name = imageName[0];
-            for (int i = 0; i <= imageName.Length-2; i++)
-            {
-                name += imageName[i];
-            }
-            var path = directory + slash + name;
-            var template = directory + slash + name;
+
+            directory = baseFolder + directory;
+            var path = directory + name + dot + format;
+            var template = path;
+
 
             if (!Directory.Exists(directory))
             {
@@ -37,15 +39,16 @@ namespace HighEnergyClub.BL.Helpers
             while (File.Exists(template))
             {
                 index++;
-                template = path + Sufix;
+                template = directory + name + Sufix + dot + format;
             }
 
-            using (var fileStream = new FileStream(directory + slash + template + dot + format, FileMode.Create))
+            using (var fileStream = new FileStream(template, FileMode.Create))
             {
-               await image.CopyToAsync(fileStream);
+                image.CopyTo(fileStream);
             }
 
-            return template;
+            return template.Remove(0, baseFolder.Length);
+
         }
 
         public static void DeleteImage(string imagePath)

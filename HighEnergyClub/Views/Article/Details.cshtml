@@ -1,0 +1,14 @@
+﻿@using HighEnergyClub.PL.ViewModels;
+
+@model ArticleViewModel
+
+<div class="card">
+    <div class="activity_img_contayner"><img src="~/@Model.Images.First().ImagePath" class="card-img-top" alt="Image of Event"></div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p class="card-text">@Model.Text</p>
+    </div>
+
+</div>
+
+

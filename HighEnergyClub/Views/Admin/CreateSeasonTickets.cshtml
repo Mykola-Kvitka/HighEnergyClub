@@ -1,0 +1,33 @@
+﻿@using System.Diagnostics.CodeAnalysis
+@model HighEnergyClub.PL.ViewModels.SeasonTicketTypeViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<div>
+    <h1>Додати тип клубної карти</h1>
+    <form method="post">
+
+        <div>
+            <label class="form-label" asp-for="SeasonTicketTitle"></label>
+            <input class="form-control" required type="text" name="SeasonTicketTitle" asp-for="SeasonTicketTitle" />
+        </div>
+
+        <div>
+            <label class="form-label" asp-for="NumbersOfVisits"></label>
+            <input class="form-control" required type="text" name="NumbersOfVisits" asp-for="NumbersOfVisits" />
+        </div>
+
+        <div>
+            <label class="form-label" asp-for="Cost"></label>
+            <input class="form-control" required type="number" name="Cost" asp-for="Cost" />
+        </div>
+
+        <div>
+            <label class="form-label" asp-for="Duration"></label>
+            <input class="form-control" required type="number" name="Duration" asp-for="Duration" />
+        </div>
+
+        <div>
+            <input type="submit" class="btn btn-primary" value="Додати" />
+        </div>
+    </form>
+</div>
+

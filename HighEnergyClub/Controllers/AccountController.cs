@@ -1,7 +1,9 @@
-﻿using HighEnergyClub.DAL.Models;
+﻿using AutoMapper;
+using HighEnergyClub.DAL.Models;
 using HighEnergyClub.PL.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HighEnergyClub.PL.Controllers
@@ -10,9 +12,13 @@ namespace HighEnergyClub.PL.Controllers
     {
         private readonly UserManager<UserEntity> _userManager;
         private readonly SignInManager<UserEntity> _signInManager;
+        private readonly IMapper _mapper;
 
-        public AccountController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
+        public AccountController(UserManager<UserEntity> userManager, IMapper mapper,
+            SignInManager<UserEntity> signInManager)
         {
+            _mapper = mapper;
+
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -55,9 +61,26 @@ namespace HighEnergyClub.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
-            return View();
+            UserViewModel userViewModel = _mapper.Map<UserEntity, UserViewModel>(await _userManager.FindByNameAsync(User.Identity.Name)); 
+
+            return View(userViewModel);
+        }
+
+        public async Task<ActionResult> EditProfileAsync(UserViewModel requestVm)
+        {
+            var request = _mapper.Map<UserViewModel, UserEntity>(requestVm);
+
+            var ApUser = await _userManager.FindByIdAsync(request.Id.ToString());
+
+            ApUser.UserName = request.UserName;
+            ApUser.Email = request.Email;
+
+            await _userManager.UpdateAsync(ApUser);
+
+
+            return Redirect("~/Account/Profile");
         }
 
         [HttpPost]

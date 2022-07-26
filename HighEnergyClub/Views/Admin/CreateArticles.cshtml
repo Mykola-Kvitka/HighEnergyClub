@@ -1,14 +1,25 @@
 ﻿@using System.Diagnostics.CodeAnalysis
-@model HighEnergyClub.PL.ViewModels.ArticleViewModel
+@model HighEnergyClub.PL.ViewModels.SaveArticleViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <div>
     <h1>Додати новину</h1>
-    <form method="post">
+    <form method="post" asp-action="CreateArticles" enctype="multipart/form-data">
 
         <div>
             <label class="form-label" asp-for="Title"></label>
             <input class="form-control" required type="text" name="Title" asp-for="Title" />
         </div>
+
+        <div>
+            <label class="form-label" asp-for="Text"></label>
+            <input class="form-control" required type="text" name="Text" asp-for="Text" />
+        </div>
+
+        <div class="mb-3">
+                        <label for="formFile" class="form-label">Загрузити зоображення:</label>
+            <input class="form-control" name="Images" type="file" id="formFile">
+        </div>
+
 
         <div>
             <input type="submit" class="btn btn-primary" value="Додати" />

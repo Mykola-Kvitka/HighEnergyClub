@@ -16,6 +16,7 @@ namespace HighEnergyClub.PL.Mapping
         public void AddWebMapping()
         {
             CreateMap<ArticleEntity, Article>().ReverseMap();
+            CreateMap<ArticleEntity, SaveArticle>().ReverseMap();
             CreateMap<ArticleImageEntity, ArticleImage>().ReverseMap();
             CreateMap<ExerciseEntity, Exercise>().ReverseMap();
             CreateMap<LinkEntity, Link>().ReverseMap();
@@ -32,6 +33,7 @@ namespace HighEnergyClub.PL.Mapping
         public void AddBusinessMapping()
         {
             CreateMap<Article, ArticleViewModel>().ReverseMap();
+            CreateMap<SaveArticle, SaveArticleViewModel>().ReverseMap();
             CreateMap<ArticleImage, ArticleImageViewModel>().ReverseMap();
             CreateMap<Exercise, ExerciseViewModel>().ReverseMap();
             CreateMap<Link, LinkViewModel>().ReverseMap();
@@ -42,6 +44,7 @@ namespace HighEnergyClub.PL.Mapping
             CreateMap<TrainingProgram, TrainingProgramViewModel>().ReverseMap();
             CreateMap<TrainingProgramExercise, TrainingProgramExerciseViewModel>().ReverseMap();
             CreateMap<User, UserViewModel>().ReverseMap();
+            CreateMap<UserEntity, UserViewModel>().ReverseMap();
             CreateMap<Role, RoleViewModel>().ReverseMap();
         }
     }

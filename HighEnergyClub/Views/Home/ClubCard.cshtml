@@ -1,109 +1,140 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model IEnumerable<HighEnergyClub.PL.ViewModels.SeasonTicketTypeViewModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
 <div class="container">
     <h2>КЛУБНА КАРТКА</h2>
-    <div class="club-card__block club-card__block_gym">
-        <div class="row">
-            <div class="col-12 caption">
-                Тренажерний зал
-            </div>
-        </div>
-        <div class="row club-card__block_title">
-            <div class="col-sm-6 d-none d-sm-block">Вид Абонементу</div>
-            <div class="col-6 col-sm-3">Вартість</div>
-            <div class="col-6 col-sm-3 d-sm-flex align-items-center justify-content-center">
-                Для студентів та школярів
-            </div>
-        </div>
-        <div class="main-table">
-            <div class="row">
-                <div class="col-12 col-sm-6">12 відвідувань 8:00-22:00 (місяць)</div>
-                <div class="col-6 col-sm-3">500 грн.</div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-sm-6">Безліміт (місяць)</div>
-                <div class="col-6 col-sm-3">550 грн.</div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-sm-6">Разове відвідування</div>
-                <div class="col-12 col-sm-6">150 грн.</div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-sm-6">Разове індивідуальне тренування</div>
-                <div class="col-12 col-sm-6">180 грн.</div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-sm-6">Створення програми тренувань на місяць</div>
-                <div class="col-12 col-sm-6">500 грн.</div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-sm-6">
-                    <p class="d-inline d-md-none">Місяць безліміт.</p>
-                    <p class="d-none d-md-inline">Місяць безліміту</p>
-                    тренер + абонемент
-                    <span>&nbsp;(АКЦІЯ)</span>
-                </div>
-                <div class="col-12 col-sm-6 sale-item">1800 грн.</div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-sm-6">Піврічний безліміт<span>&nbsp;(АКЦІЯ)</span></div>
-                <div class="col-12 col-sm-6 sale-item">2500 грн.</div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-sm-6">Річний безліміт<span>&nbsp;(АКЦІЯ)</span></div>
-                <div class="col-12 col-sm-6 sale-item">4000 грн.</div>
-            </div>
-        </div>
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Вид Абонементу</th>
+                <th scope="col">Вартість</th>
+                <th scope="col">Кількість відвідувань</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
 
-    <p class="text-upper">У ціну всіх абонементів включено консультаційні послуги тренера</p>
-    <div class="club-card__block club-card__group">
-        <div class="row">
-            <div class="col-12 caption">
-                Групові тренування
+                <tr>
+                    <th scope="row"></th>
+                    <td>@i.SeasonTicketTitle</td>
+                    <td>@i.Cost</td>
+                    <td>@i.NumbersOfVisits</td>
+                    <td>
+                        <a type="button"
+                           href="@("/Home/Index")"
+                           class="btn btn-primary">Купити</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    @*<div class="club-card__block club-card__block_gym">
+            <div class="row">
+                <div class="col-12 caption">
+                    Тренажерний зал
+                </div>
+            </div>
+            <div class="row club-card__block_title">
+                <div class="col-sm-6 d-none d-sm-block">Вид Абонементу</div>
+                <div class="col-6 col-sm-3">Вартість</div>
+                <div class="col-6 col-sm-3 d-sm-flex align-items-center justify-content-center">
+                    Для студентів та школярів
+                </div>
+            </div>
+            <div class="main-table">
+                <div class="row">
+                    <div class="col-12 col-sm-6">12 відвідувань 8:00-22:00 (місяць)</div>
+                    <div class="col-6 col-sm-3">500 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">Безліміт (місяць)</div>
+                    <div class="col-6 col-sm-3">550 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">Разове відвідування</div>
+                    <div class="col-12 col-sm-6">150 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">Разове індивідуальне тренування</div>
+                    <div class="col-12 col-sm-6">180 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">Створення програми тренувань на місяць</div>
+                    <div class="col-12 col-sm-6">500 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <p class="d-inline d-md-none">Місяць безліміт.</p>
+                        <p class="d-none d-md-inline">Місяць безліміту</p>
+                        тренер + абонемент
+                        <span>&nbsp;(АКЦІЯ)</span>
+                    </div>
+                    <div class="col-12 col-sm-6 sale-item">1800 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">Піврічний безліміт<span>&nbsp;(АКЦІЯ)</span></div>
+                    <div class="col-12 col-sm-6 sale-item">2500 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">Річний безліміт<span>&nbsp;(АКЦІЯ)</span></div>
+                    <div class="col-12 col-sm-6 sale-item">4000 грн.</div>
+                </div>
+            </div>
+        </div>*@
+
+    @*<p class="text-upper">У ціну всіх абонементів включено консультаційні послуги тренера</p>
+        <div class="club-card__block club-card__group">
+            <div class="row">
+                <div class="col-12 caption">
+                    Групові тренування
+                </div>
+            </div>
+            <div class="main-table">
+                <div class="row">
+                    <div class="col-sm-6">8 відвідувань</div>
+                    <div class="col-sm-6">500 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">12 відвідувань</div>
+                    <div class="col-sm-6">600 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Разове відвідування</div>
+                    <div class="col-sm-6">150 грн.</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Індивідуальне тренування</div>
+                    <div class="col-sm-6">250 грн.</div>
+                </div>
             </div>
         </div>
-        <div class="main-table">
+        <div class="club-card__block club-card__joint">
             <div class="row">
-                <div class="col-sm-6">8 відвідувань</div>
-                <div class="col-sm-6">500 грн.</div>
+                <div class="col-12 caption">
+                    Спільний абонемент
+                </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">12 відвідувань</div>
-                <div class="col-sm-6">600 грн.</div>
+            <div class="row club-card__block_title">
+                <div class="col-12 col-sm-6">8 + 8<br>відвідувань тренажерного залу та групових тренувань</div>
+                <div class="col-12 d-sm-none">700 грн.</div>
+                <div class="col-12 col-sm-6">БЕЗЛІМІТ НА ВСЕ<span>&nbsp;(АКЦІЯ)</span></div>
+                <div class="col-12 d-sm-none">800 грн.</div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">Разове відвідування</div>
-                <div class="col-sm-6">150 грн.</div>
+            <div class="main-table d-none d-sm-block">
+                <div class="row">
+                    <div class="col-sm-6">700 грн.</div>
+                    <div class="col-sm-6">800 грн.</div>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">Індивідуальне тренування</div>
-                <div class="col-sm-6">250 грн.</div>
-            </div>
-        </div>
-    </div>
-    <div class="club-card__block club-card__joint">
-        <div class="row">
-            <div class="col-12 caption">
-                Спільний абонемент
-            </div>
-        </div>
-        <div class="row club-card__block_title">
-            <div class="col-12 col-sm-6">8 + 8<br>відвідувань тренажерного залу та групових тренувань</div>
-            <div class="col-12 d-sm-none">700 грн.</div>
-            <div class="col-12 col-sm-6">БЕЗЛІМІТ НА ВСЕ<span>&nbsp;(АКЦІЯ)</span></div>
-            <div class="col-12 d-sm-none">800 грн.</div>
-        </div>
-        <div class="main-table d-none d-sm-block">
-            <div class="row">
-                <div class="col-sm-6">700 грн.</div>
-                <div class="col-sm-6">800 грн.</div>
-            </div>
-        </div>
-    </div>
+        </div>*@
     <p class="text-upper">Клієнти продовжують абонемент 12 місяців поспіль - один місяць у подарунок.*</p>
 
     <p class="club-card__attention">
